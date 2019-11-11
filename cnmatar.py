@@ -4,6 +4,7 @@ import re
 class metar(object):
     def __init__(self, rawmetar):
         raw = re.split(r'\s+', rawmetar)
+        self.rawmetar = rawmetar
         self.all = raw    #所有字段
         self.isspeci = False
         self.isauto = False
@@ -85,7 +86,7 @@ class metar(object):
                     elif rvr.group(5):
                         self.rvrtd4 = rvr.group(5)
                     self.rvr4v = rvr.group(4) 
-            if ri>4 and re.search(r'(?<!RE)(SH|TS|DZ|RA|SN|SG|GS|GR|IC|PL|BR|FG|FU|DU|HZ|SA|VA|PO|SQ|FC|SS|DS)',r):
+            if ri>4 and re.match(r'(?<!RE)(-|\+|VC|MI|BC|PR|DR|BL|FZ|SH|TS|DZ|RA|SN|SG|GS|GR|IC|PL|BR|FG|FU|DU|HZ|SA|VA|PO|SQ|FC|SS|DS)',r):
                 self.ww.append(r)      #所有天气现象（列表）
                 if self.ww1 is None:
                     self.ww1 = r       #单个天气现象（最多3组）
@@ -263,5 +264,5 @@ class metar(object):
         if self.slp:
             lines.append('SLP: %dhPa' % int(self.slp))
 
-        lines.append('METAR: '+rawmetar)
+        lines.append('METAR: '+self.rawmetar)
         return '\n'.join(lines)

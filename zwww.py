@@ -10,7 +10,7 @@ import cnmatar
 # 		print(ri,df['time'][ri],r)
 
 
-a = 'SPECI ZSNB 030614Z 06004MPS 010V090 9999 -TSRA BKN023 SCT026CB 31/25 Q1006 RESHRA BECMG TL0640 TSRA='
+a = 'SPECI ZSNB 030614Z 06004MPS 010V090 9999 -TS BKN023 SCT026CB 31/25 Q1006 RESHRA BECMG TL0640 TSRA='
 data = cnmatar.metar(a)
-aa = data.info
-print(aa)
+#aa = data.info
+print(data.ww2)
